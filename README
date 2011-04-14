@@ -1,0 +1,9 @@
+DESCRIPTION
+Set of configuration files for :
+    awesome window manager
+    emacs
+    bash
+
+INSTALL
+To copy the files in home directory:
+$>make install
