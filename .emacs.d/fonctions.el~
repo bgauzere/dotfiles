@@ -1,0 +1,86 @@
+(defun numerote ( )
+  "Numerote toute les lignes du buffer"
+  (interactive)
+  (beginning-of-buffer)
+  (let ((counter 0))
+    (while (< (point) (point-max))
+      (beginning-of-line)
+      (setq counter (+ counter 1))
+      (insert-string counter "\t")
+      (next-line ) )))
+
+(defun truc ( )
+  "Numerote toute les lignes du buffer"
+  (interactive)
+  (beginning-of-buffer)
+  (let ((counter 0))
+    (while (< (point) (point-max))
+      (beginning-of-line)
+      (insert-string "wget ")
+      (next-line ) )))
+	  
+(defun denumerote ( )
+  "Défait le numerotage"
+  (interactive)
+  (beginning-of-buffer)
+  (while (< (point) (point-max))
+    (beginning-of-line)
+    (replace-regexp "[-]*" "")
+    (next-line ) ))
+	
+(defun indeter(debut, fin)
+  "Rajoute une tabulation au début de toutes les lignes de la region"
+  (interactive "r")
+   (if (> (point)  (mark))
+     (exchange-point-and-mark) 
+   )
+  (if (< (point)  (mark))
+  (while (< (point) (mark))
+    (beginning-of-line)
+    (insert-string (format "\t"))
+    (next-line 1) )
+)
+)
+
+;;Exemple fonction simple
+(defun bonjour (quelquun)
+  "Dites bonjour à quelqu'un avec la commande M-x bonjour."
+  (interactive "À qui voulez-vous dire bonjour ? ")
+  (message "Bonjour %s!" quelquun))
+
+;;Permet d'insérer la date ...
+(defun insert-current-date ()
+  "Insere la date du jour"
+  (interactive)
+  (insert (format-time-string "%d-%m-%Y")))
+;;Plus agreable à l'oeil la nuit 	
+(defun mode-nuit () 
+  "Change les couleurs pour qu'elles soient plus agréables a l'oeil lors du travail avec peu de lumiere"
+  (interactive)
+  (set-background-color "gray")
+  (set-foreground-color "ghost white")
+  (set-cursor-color "green"))
+;;Plus agreable à l'oeil le jour	
+(defun mode-jour () 
+  "Change les couleurs pour qu'elles soient plus agréables a l'oeil lors du travail avec beaucoup de lumiere"
+  (interactive)
+  (set-background-color "ghost white")
+  (set-foreground-color "black")
+  (set-cursor-color "dodger blue"))
+
+(defun c-init-header-file()
+  "Ajoute les entetes #ifndef NOM_H ..."
+  (interactive)
+  (setq nomfichier  (upcase (substring(file-name-nondirectory buffer-file-name) 0 -2)))
+  (beginning-of-buffer)
+  (insert (format "#ifndef %s_H\n" nomfichier))
+  (insert (format "#define %s_H\n" nomfichier))
+  (end-of-buffer)  
+  (insert (format "\n#endif\n")))
+
+
+(defun test(debut, fin)
+"fonction de test ..."
+  (interactive "r")
+  (message "%d"(mark))
+)

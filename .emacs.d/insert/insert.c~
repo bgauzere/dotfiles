@@ -1,0 +1,29 @@
+/*
+ * @file %f
+ * @author %U <%a> 
+ * @version     0.0.1 - %d
+ * 
+ * @todo the list of improvements suggested for the file.
+ * @bug the list of known bugs.
+ *  
+ * Description of the program objectives.
+ * All necessary references.
+ *
+ */
+
+#include <stdio.h>
+
+/**
+ * Show the program's usage.
+ */
+
+void showUsage (char * s)
+{
+  fprintf(stderr,"Usage : %s \n",s);
+  fprintf(stderr,"\toptions: \n");
+}
+
+int main (int argc, char** argv)
+{	
+  return 0;
+}
