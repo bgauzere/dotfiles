@@ -5,6 +5,6 @@ Set of configuration files for :
     bash
 
 INSTALL
-$>make install-dotfiles : copy emacs and bash configuration files
+$>make install-dotfiles : copy configuration files
 
 $>make install-awesome : copy and replace awesome config files
