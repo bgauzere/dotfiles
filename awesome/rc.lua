@@ -1,14 +1,13 @@
 -- Standard awesome library
+require("eminent")
 require("awful")
 require("awful.autofocus")
 require("awful.rules")
---
-require("vicious")
 -- Theme handling library
 require("beautiful")
+require("vicious")
 -- Notification library
 require("naughty")
-
 -- Load Debian menu entries
 require("debian.menu")
 
@@ -31,7 +30,6 @@ modkey = "Mod4"
 -- Table of layouts to cover with awful.layout.inc, order matters.
 layouts =
 {
-    awful.layout.suit.floating,
     awful.layout.suit.tile,
     awful.layout.suit.tile.left,
     awful.layout.suit.tile.bottom,
@@ -42,18 +40,23 @@ layouts =
     awful.layout.suit.spiral.dwindle,
     awful.layout.suit.max,
     awful.layout.suit.max.fullscreen,
-    awful.layout.suit.magnifier
+    awful.layout.suit.magnifier,
+    awful.layout.suit.floating
 }
 -- }}}
 
 -- {{{ Tags
--- Define a tag table which hold all screen tags.
-tags = {}
-for s = 1, screen.count() do
-    -- Each screen has its own tag table.
-    tags[s] = awful.tag({ "mail", "term", "emacs", "doc", "pdf", "others", "web", "im", 9 }, s, layouts[2])
-end
--- }}}
+-- Define a tag table which will hold all screen tags.
+--"☭", "⌥", "✇", "⌤", "☼", "⌘" "☠", "⌥", "✇", "⌤", "⍜", "✣", "⌨", "⌘", "☕" 
+ tags = {
+   names  = { "web", "com", "term", "emacs", "zik", "⌥", "⌘" ,"☭", "✇","⌤"},
+   layout = { layouts[1], layouts[1], layouts[3], layouts[1], layouts[1],
+              layouts[1], layouts[1], layouts[1], layouts[1]
+	}}
+ for s = 1, screen.count() do
+     tags[s] = awful.tag(tags.names, s, tags.layout)
+ end
+ -- }}}
 
 -- {{{ Menu
 -- Create a laucher widget and a main menu
@@ -76,6 +79,12 @@ mylauncher = awful.widget.launcher({ image = image(beautiful.awesome_icon),
 
 -- {{{ Wibox
 
+-- Create a textclock widget
+mytextclock = awful.widget.textclock({ align = "right" })
+
+-- Create a systray
+mysystray = widget({ type = "systray" })
+
 -- Memory widget
 memwidget = widget({ type = "textbox" })
 vicious.register(memwidget, vicious.widgets.mem, "Mem:$1%", 13)
@@ -83,13 +92,6 @@ vicious.register(memwidget, vicious.widgets.mem, "Mem:$1%", 13)
 -- Memory widget
 cpuwidget = widget({ type = "textbox" })
 vicious.register(cpuwidget, vicious.widgets.cpu, "CPU:$1%")
-
-
--- Create a textclock widget
-mytextclock = awful.widget.textclock({ align = "right" })
-
--- Create a systray
-mysystray = widget({ type = "systray" })
 
 -- Create a wibox for each screen and add it
 mywibox = {}
@@ -226,18 +228,17 @@ globalkeys = awful.util.table.join(
 
     -- Prompt
     awful.key({ modkey },            "r",     function () mypromptbox[mouse.screen]:run() end),
+    --Wallpapers
+    awful.key({ modkey, Shift },     "w",     function () awful.util.spawn("awsetbg -c -r /home/bgauzere/Images/Wallpapers/") end),
     
     awful.key({ modkey }, "x",
               function ()
-		 awful.prompt.run({ prompt = "Run Lua code: " },
-				  mypromptbox[mouse.screen].widget,
-				  awful.util.eval, nil,
-				  awful.util.getdir("cache") .. "/history_eval")
-              end),
-    -- Programs
-    awful.key({ modkey, "Shift"   }, "x", function () awful.util.spawn("xlock") end),
-    awful.key({ modkey, "Shift"   }, "f", function () awful.util.spawn("firefox") end)
- )
+                  awful.prompt.run({ prompt = "Run Lua code: " },
+                  mypromptbox[mouse.screen].widget,
+                  awful.util.eval, nil,
+                  awful.util.getdir("cache") .. "/history_eval")
+              end)
+)
 
 clientkeys = awful.util.table.join(
     awful.key({ modkey,           }, "f",      function (c) c.fullscreen = not c.fullscreen  end),
@@ -304,38 +305,29 @@ root.keys(globalkeys)
 
 -- {{{ Rules
 awful.rules.rules = {
-    -- All clients will match this rule.
-    { rule = { },
-      properties = { border_width = beautiful.border_width,
-                     border_color = beautiful.border_normal,
-                     focus = true,
-                     keys = clientkeys,
-                     buttons = clientbuttons } },
-    { rule = { class = "MPlayer" },
-      properties = { floating = true } },
-    { rule = { class = "pinentry" },
-      properties = { floating = true } },
-    { rule = { class = "gimp" },
-      properties = { floating = true } },
-    -- Set Firefox to always map on tags number 2 of screen 1.
-    { rule = { class = "Firefox" },
-      properties = { tag = tags[1][7] } },
-    { rule = { class = "Empathy" },
-      properties = { tag = tags[1][8] } },
-    { rule = { class = "empathy" },
-      properties = { tag = tags[1][8] } },
-    { rule = { class = "Emacs" },
-      properties = { tag = tags[1][3] } },
-    { rule = { class = "Thunderbird" },
-      properties = { tag = tags[1][1] } },
-    { rule = { class = "Evince" },
-      properties = { tag = tags[1][5] } },
-    { rule = { class = "Xpdf" },
-      properties = { tag = tags[1][5] } },
-
-    
-    
-
+   -- All clients will match this rule.
+   { rule = { },
+     properties = { border_width = beautiful.border_width,
+		    border_color = beautiful.border_normal,
+		    focus = true,
+		    keys = clientkeys,
+		    buttons = clientbuttons } },
+   { rule = { class = "gimp" },
+     properties = { floating = true } },
+   { rule = { class = "Firefox" },
+     properties = { tag = tags[1][1] } },
+   { rule = { class = "Thunderbird" },
+     properties = { tag = tags[1][2] } },
+   { rule = { instance = "empathy" },
+     properties = { tag = tags[1][2] } },
+   { rule = { class = "gnome-terminal"},
+     properties = { tag = tags[1][3] } },	
+   { rule = { class = "Emacs"},
+     properties = { tag = tags[1][4], switchtotag = true} },
+   { rule = { class = "Exaile"},
+     properties = { tag = tags[1][5] } },
+   { rule = { class = "Banshee"},
+     properties = { tag = tags[1][5] } }
 }
 -- }}}
 
@@ -370,9 +362,7 @@ client.add_signal("focus", function(c) c.border_color = beautiful.border_focus e
 client.add_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
 -- }}}
 
-
-
 os.execute("nm-applet &")
 os.execute("empathy &")
-os.execute("tomboy &")
+-- os.execute("tomboy &")
 os.execute("gnome-volume-control-applet &")
