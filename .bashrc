@@ -1,5 +1,5 @@
 # ~/.bashrc: executed by bash(1) for non-login shells.
-# see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
+# see  /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
 
 # If not running interactively, don't do anything
@@ -129,6 +129,15 @@ export CVS_RSH=ssh
 shopt -s histappend
 HISTSIZE=100000
 HISTFILESIZE=250000
+
+#Mise a jour TODO Lists
+if [ -e ~/bin/wakeup ]
+then
+    $HOME/bin/wakeup
+fi
+
+#Chem Cpp
+LD_LIBRARY_PATH=$HOME/dev/chemcpp_1.0.2/src/:$LD_LIBRARY_PATH
 
 # txtrst=$(tput sgr0)
 # txtred=$(tput setaf 1)

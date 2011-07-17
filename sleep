@@ -1,9 +1,9 @@
 #Mise a jour todo list
 if [ -e ~/org ]; 
 then 
-    if [ -e ~/org/.svn ]; 
+    if [ -e ~/org/.svn ];
     then
 	echo "Mise a jour des TODO list (org mode)";
-	cd ~/org && svn ci -m "Mise a jour sleep"  && cd
+	cd ~/org && svn ci -m "Auto update sleep script"  && cd
     fi
 fi

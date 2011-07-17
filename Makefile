@@ -7,7 +7,7 @@ AWESOME_DIR=$(BASE_DIR).config/
 install-dotfiles:
 	mkdir -p $(BASE_DIR).emacs.d/
 	cp -rf  $(DOT_FILES) $(BASE_DIR)
-	mkdir -p $(BASE_DIR)bin/
+	mkdir -p	 $(BASE_DIR)bin/
 	cp wakeup $(BIN_DIR) && chmod +x $(BIN_DIR)/wakeup
 
 install-awesome:

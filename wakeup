@@ -1,9 +1,33 @@
 #Mise a jour todo list
+current_directory=`pwd`;
+res=1;
+echo "Org files update ..."
 if [ -e ~/org ]; 
 then 
     if [ -e ~/org/.svn ]; 
     then
-	echo "Mise a jour des TODO list (org mode)";
-	cd ~/org && svn up  && cd
+	echo "Mise a jour des TODO list (org mode)"
+	cd ~/org && svn up 2> /dev/null 
+	if [ $? == "1" ];
+	then
+	    echo "Svn update failed" 
+	    res=0;
+	fi
+	cd $current_directory
+    else
+	echo "No SVN repository found."
+	res=0;
+	##TODO: Ask and co svn repository
     fi
+else
+    echo "No org directory found."
+    res=0;
+    ##TODO: Ask and create org directory 
+fi
+
+if [ res ];
+then
+    echo "Ok.";
+else
+    echo "Org File update failed.";
 fi
