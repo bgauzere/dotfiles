@@ -50,7 +50,7 @@ layouts =
 --"☭", "⌥", "✇", "⌤", "☼", "⌘" "☠", "⌥", "✇", "⌤", "⍜", "✣", "⌨", "⌘", "☕" 
  tags = {
    names  = { "web", "com", "term", "emacs", "zik", "⌥", "⌘" ,"☭", "✇","⌤"},
-   layout = { layouts[1], layouts[1], layouts[3], layouts[1], layouts[1],
+   layout = { layouts[1], layouts[1], layouts[1], layouts[1], layouts[1],
               layouts[1], layouts[1], layouts[1], layouts[1]
 	}}
  for s = 1, screen.count() do
@@ -229,7 +229,7 @@ globalkeys = awful.util.table.join(
     -- Prompt
     awful.key({ modkey },            "r",     function () mypromptbox[mouse.screen]:run() end),
     --Wallpapers
-    awful.key({ modkey, Shift },     "w",     function () awful.util.spawn("awsetbg -c -r /home/bgauzere/Images/Wallpapers/") end),
+    awful.key({ modkey, Shift },     "w",     function () awful.util.spawn("awsetbg -c -r /home/bgauzere/Images/WallPapers/") end),
     
     awful.key({ modkey }, "x",
               function ()

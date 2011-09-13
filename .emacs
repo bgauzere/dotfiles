@@ -231,3 +231,18 @@
   (switch-to-buffer "*Org Agenda*"))
 (add-hook 'window-setup-hook 'custom-startup) 
 
+;;AUCTEX
+(load "auctex.el" nil t t)
+(setq reftex-plug-into-AUCTeX t)
+(setq TeX-PDF-mode t)
+(setq TeX-auto-save t)
+(setq TeX-parse-self t)
+(setq-default TeX-master nil)
+
+(add-hook 'LaTeX-mode-hook 'visual-line-mode)
+(add-hook 'LaTeX-mode-hook 'flyspell-mode)
+(add-hook 'LaTeX-mode-hook 'LaTeX-math-mode)
+
+(add-hook 'LaTeX-mode-hook 'turn-on-reftex)
+(setq reftex-plug-into-AUCTeX t)
+(load "preview-latex.el" nil t t)
