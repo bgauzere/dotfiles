@@ -229,8 +229,9 @@ globalkeys = awful.util.table.join(
     -- Prompt
     awful.key({ modkey },            "r",     function () mypromptbox[mouse.screen]:run() end),
     --Wallpapers
-    awful.key({ modkey, Shift },     "w",     function () awful.util.spawn("awsetbg -c -r /home/bgauzere/Images/WallPapers/") end),
-    
+    awful.key({ modkey,       },     "w",     function () awful.util.spawn("awsetbg -c -r /home/bgauzere/Images/WallPapers/") end),
+    awful.key({ modkey,       },     "s",     function () awful.util.spawn("amixer set Master 2+") end),
+    awful.key({ modkey, "Shift" },     "s",     function () awful.util.spawn("amixer set Master 2-") end),
     awful.key({ modkey }, "x",
               function ()
                   awful.prompt.run({ prompt = "Run Lua code: " },
