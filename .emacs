@@ -246,3 +246,6 @@
 (add-hook 'LaTeX-mode-hook 'turn-on-reftex)
 (setq reftex-plug-into-AUCTeX t)
 (load "preview-latex.el" nil t t)
+
+;; Share Copy/Paste with X11 applications
+(setq x-select-enable-clipboard t)
