@@ -365,7 +365,7 @@ client.add_signal("focus", function(c) c.border_color = beautiful.border_focus e
 client.add_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
 -- }}}
 
-os.execute("nm-applet &")
-os.execute("empathy &")
+-- os.execute("nm-applet &")
+-- os.execute("empathy &")
 -- os.execute("tomboy &")
-os.execute("gnome-volume-control-applet &")
+-- os.execute("gnome-volume-control-applet &")
