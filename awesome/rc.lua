@@ -230,8 +230,8 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey },            "r",     function () mypromptbox[mouse.screen]:run() end),
     --Wallpapers
     awful.key({ modkey,       },     "w",     function () awful.util.spawn("awsetbg -c -r /home/bgauzere/Images/WallPapers/") end),
-    awful.key({ modkey,       },     "s",     function () awful.util.spawn("amixer set Master 2+") end),
-    awful.key({ modkey, "Shift" },     "s",     function () awful.util.spawn("amixer set Master 2-") end),
+    awful.key({ modkey,       },     "s",     function () awful.util.spawn("amixer set Master 5%+ -c 0") end),
+    awful.key({ modkey, "Shift" },     "s",     function () awful.util.spawn("amixer set Master 5%- -c 0") end),
     awful.key({ modkey }, "x",
               function ()
                   awful.prompt.run({ prompt = "Run Lua code: " },
@@ -319,6 +319,10 @@ awful.rules.rules = {
      properties = { tag = tags[1][1] } },
    { rule = { class = "Thunderbird" },
      properties = { tag = tags[1][2] } },
+   { rule = { class = "Mail" },
+     properties = { tag = tags[1][2] } },
+   { rule = { class = "Icedove" },
+     properties = { tag = tags[1][2] } },
    { rule = { instance = "empathy" },
      properties = { tag = tags[1][2] } },
    { rule = { class = "gnome-terminal"},
@@ -366,6 +370,6 @@ client.add_signal("unfocus", function(c) c.border_color = beautiful.border_norma
 -- }}}
 
 -- os.execute("nm-applet &")
--- os.execute("empathy &")
+os.execute("empathy &")
 -- os.execute("tomboy &")
 -- os.execute("gnome-volume-control-applet &")
