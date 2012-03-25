@@ -121,6 +121,10 @@ export PATH=/home/bgauzere/bin:$PATH
 #SERVEURS GREYC
 export CYBELE="gauzere@cybele.ecole.ensicaen.fr"
 export LYRE="bgauzere@lyre.greyc.ensicaen.fr"
+export SULLY="gauzere@sully.info.unicaen.fr"
+export GEMINI=" -t $LYRE ssh gemini"
+export CODY="-t $SULLY ssh cody"
+export APPO="-t $SULLY ssh appo"
 export CVS_RSH=ssh
 
 shopt -s histappend
@@ -150,3 +154,4 @@ LD_LIBRARY_PATH=$HOME/dev/chemcpp_1.0.2/src/:$LD_LIBRARY_PATH
 #     sleep 0.05
 # done
 # trap 9
+

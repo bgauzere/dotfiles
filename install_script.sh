@@ -1,6 +1,6 @@
 #!/bin/sh
 #Reinstalle le systeme
-#Mettre en argument les paquets à rajouter
+# Argument :  paquets à installer en +
 
 #network
 echo "Configuring network ..."
@@ -10,13 +10,15 @@ echo "Done : " $?
 
 #paquets
 echo "Configuring apt-get ..."
-cat ./sources.list >> /etc/apt/sources.list
+mv  ./sources.list /etc/apt/sources.list
 apt-get update
-apt-get install auctex awesome banshee build-essential chromium-browser cmake cmake emacs flashplugin-nonfree gajim-nightly htop icedove iceweasel libcvaux-dev libfftw3-dev libgsl0-dev libhighgui-dev liblapack-dev mplayer nfs-common pmount qalc subversion texlive-lang-french texlive-latex-extra vlc $1
+apt-get install auctex autoconf awesome banshee build-essential chromium-browser cmake cvs emacs ffmpeg flashplugin-nonfree gajim-nightly geeqie git gnuplot htop icedove iceweasel lame libcvaux-dev libfftw3-dev libfftw3-dev libgsl0-dev libhighgui-dev liblapack-dev linux-headers-amd64 mplayer nfs-common octave openssh-server pcmanfm pdfmod pmount qalc sox stellarium subversion texlive-bibtex-extra texlive-fonts-extra texlive-fonts-recommended texlive-lang-french texlive-latex-extra vlc xchat xpdf ntp jack jackd curl lshw unzip $1
 echo "Done : " $?
 
-echo "Configuring NFS ..."
 #nfs data
+echo "Configuring NFS ..."
 mkdir /data
 echo "adiou:/data/ /data nfs defaults,user,auto,noatime,intr 0 0" >> /etc/fstab
 echo "Done"
+
+#NVIDIA drivers
