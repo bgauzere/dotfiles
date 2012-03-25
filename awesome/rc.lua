@@ -16,7 +16,7 @@ require("debian.menu")
 beautiful.init("/home/bgauzere/.config/awesome/default/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
-terminal = "x-terminal-emulator"
+terminal = "xterm"
 editor = os.getenv("EDITOR") or "editor"
 editor_cmd = terminal .. " -e " .. editor
 
@@ -325,13 +325,17 @@ awful.rules.rules = {
      properties = { tag = tags[1][2] } },
    { rule = { instance = "empathy" },
      properties = { tag = tags[1][2] } },
-   { rule = { class = "gnome-terminal"},
-     properties = { tag = tags[1][3] } },	
+   { rule = { instance = "gajim" },
+     properties = { tag = tags[1][2] } },
+   -- { rule = { instance = "xterm" },
+   --   properties = { tag = tags[1][3] } },	
    { rule = { class = "Emacs"},
-     properties = { tag = tags[1][4], switchtotag = true} },
+     properties = { tag = tags[1][4] } },
    { rule = { class = "Exaile"},
      properties = { tag = tags[1][5] } },
    { rule = { class = "banshee-1"},
+     properties = { tag = tags[1][5] } },
+   { rule = { class = "banshee"},
      properties = { tag = tags[1][5] } },
    { rule = { class = "Banshee"},
      properties = { tag = tags[1][5] } }
@@ -370,6 +374,7 @@ client.add_signal("unfocus", function(c) c.border_color = beautiful.border_norma
 -- }}}
 
 -- os.execute("nm-applet &")
-os.execute("empathy &")
+os.execute("xrdb -merge ~/.Xresources")
+
 -- os.execute("tomboy &")
 -- os.execute("gnome-volume-control-applet &")
